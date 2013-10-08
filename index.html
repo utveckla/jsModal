@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>jsModal - Modal generator in pure JavaScript.</title>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+<style>
+html {
+	font-family: arial, sans-serif;
+	color: #444;
+}
+body {
+	background: #eee;
+}
+#header {
+	background: #fafafa;
+	border-bottom: 1px solid #f2f2f2;
+	overflow: hidden;
+	text-align: center;
+}
+#jsmodal-logo {
+	float: right;
+	margin: 10px;
+}
+#wrapper {
+	background: #fff;
+	-moz-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	margin: 0 auto;
+	width: 800px;
+}
+#wrapper > div {
+	display: block;
+	margin: 10px;
+}
+#footer {
+	background: #f9f9f9;
+	border-top: 1px solid #f5f5f5;
+	text-align: center;
+}
+h1, h4 {
+	font-family: "open sans", arial, sans-serif;
+}
+a {
+	color: #36c;
+}
+pre {
+	border: 1px solid #777;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word; 
+}
+.light-grey {
+	background-color: #F0F0F0;
+}
+.grey {
+	background-color: #EEE;
+}
+</style>
+<link href="css/jsmodal-light.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="wrapper">
+	<div id="header">
+		<img id="jsmodal-logo" alt="jsModal" height="87" src="images/jsmodal-logo.png" width="100" />
+		<h1>jsModal!</h1>
+		<p>A modal box engine written in pure JavaScript</p>
+	</div>
+	<div id="content">
+		<h4>What is jsModal?</h4>
+		<p>jsModal is a fast, small, and feature-sufficient JavaScript modal box 
+		engine. It makes things like generating modals much simpler with an easy-to-use 
+		call that works across a multitude of browsers. With a combination of limitations 
+		and constraints, jsModal will change the way that a super-minute fraction 
+		of people write JavaScript.</p>
+		<h4>Who's using jsModal</h4>
+		<p>Well, nobody as far as we know. Everyone seems to be using that jQeer-thingy 
+		library. Which is all good, because jsModal works seemlessly with it, and 
+		several other available libraries such as (Cow sound)-Tools and (Homer exclamation)-Joe.</p>
+		<ul>
+			<li><a href="http://jsmodal.com" target="_blank"> 
+			jsModal official website</a></li>
+			<li>Download:<a href="https://drive.google.com/folderview?id=0B76smB_YGoSJd1RaREFMZVJpcE0&amp;usp=sharing" target="_blank"> 
+			jsModal v1.0d</a></li>
+			<li>Google Code Repository:
+			<a href="http://code.google.com/p/jsmodal/" target="_blank">http://code.google.com/p/jsmodal/</a></li>
+			<li>
+			<a href="http://code.google.com/p/jsmodal/wiki/Parameters" target="_blank">
+			Full list and specification of usage parameters</a></li>
+		</ul>
+		<h4>A Brief Look</h4>
+		<p><strong>Launching a modal (plus draggable support)</strong> </p>
+		<pre>
+&lt;script&gt;
+document.getElementById('modal-1').onclick = function() {
+  Modal.open({
+    content: '&lt;strong&gt;Default modal!&lt;/strong&gt;&lt;br /&gt;Testing the modal.&lt;br /&gt;&lt;br /&gt;Loreum ipsum dolorem the quick brown fox jumped over the lazy dog.&lt;br /&gt;&lt;br /&gt;Yes its true.',
+               draggable: true,
+               openCallback: function () {
+                   alert('This is an example of the use of openCallback');
+               }
+            });
+}
+&lt;/script&gt;
+</pre>
+		<input id="modal-1" type="button" value="Example 1" />
+		<p><strong>Using some of the other parameters</strong> </p>
+		<pre>
+&lt;script&gt;
+document.getElementById('modal-2').onclick = function() {
+  Modal.open({
+    ajaxContent: 'http://jsmodal.com/ajax-example.html',
+    width: '50%', // Can be set to px, em, %, or whatever else is out there.
+    height: '50%',
+    hideclose: true, // Hides the close-modal graphic
+    closeAfter: 10 // Define this number in seconds.
+  });
+}
+&lt;/script&gt;
+</pre>
+		<input id="modal-2" type="button" value="Example 2" />
+		<p><strong>The parameters</strong></p>
+		<table style="width: 100%">
+			<tr>
+				<td class="light-grey">content:</td>
+				<td class="grey">Define content here. e.g. content: 'Hello World!',</td>
+			</tr>
+			<tr>
+				<td class="light-grey">ajaxContent:</td>
+				<td>Define the URL to the content (cross-domain requests not supported 
+				yet).</td>
+			</tr>
+			<tr>
+				<td class="light-grey">width:<br />
+				height:</td>
+				<td class="grey">The width and height of the modal. If both or either 
+				of them is left blank, the default will be 'auto'. Make sure to 
+				include the format, i.e. '100px' or '100em' or '100%' etc.</td>
+			</tr>
+			<tr>
+				<td class="light-grey">draggable:</td>
+				<td>Set this to true in order to make the Modal draggable. (touch 
+				support yet to be implemented).</td>
+			</tr>
+			<tr>
+				<td class="light-grey">closeAfter:</td>
+				<td class="grey">Define the number in seconds. The modal will close 
+				after the provided time.</td>
+			</tr>
+			<tr>
+				<td class="light-grey">hideClose:</td>
+				<td>Set this to true in order to hide the close graphic. The modal 
+				will still be escapable via the ESC key or clicking the overlay.</td>
+			</tr>
+			<tr>
+				<td class="light-grey">lock:</td>
+				<td class="grey">Set this to true in order to make the modal unescapable 
+				and hides the close graphic. You will have to set a close trigger 
+				within the modal (or alternatively, closeAfter:). To set a close 
+				trigger, call: Modal.close();</td>
+			</tr>
+			<tr>
+				<td class="light-grey">openCallback:</td>
+				<td class="grey">Allows you to pass a function to be run when the 
+				modal has been opened.</td>
+			</tr>
+			<tr>
+				<td class="light-grey">closeCallback:</td>
+				<td>Allows you to pass a function to be run when upon closing of 
+				the modal.</td>
+			</tr>
+			<tr>
+				<td class="light-grey">hideOverlay:</td>
+				<td class="grey">Disables the overlay if you set this to false.<br />
+				Note: If you dont intend on using this, you don't have to include 
+				it at all when opening a modal.</td>
+			</tr>
+		</table>
+	</div>
+	<div id="footer">
+		© 2013 Henry Tang Kai</div>
+</div>
+<script src="js/jsmodal-1.0d.js"></script>
+<script>
+document.getElementById('modal-1').onclick = function() {
+  Modal.open({
+      content: '<strong>Default modal!</strong><br />Testing the modal.<br /><br />Loreum ipsum dolorem the quick brown fox jumped over the lazy dog.<br /><br />Yes its true.',
+      draggable: true,
+      openCallback: function () {
+          alert('This is an example of the use of openCallback');
+      }
+  });
+}
+document.getElementById('modal-2').onclick = function() {
+  Modal.open({
+    ajaxContent: 'ajax-example.html',
+    width: '50%',
+    height: '50%',
+    hideClose: true,
+    closeAfter: 10
+  });
+}
+</script>
+
+</body>
+
+</html>
