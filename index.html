@@ -125,6 +125,28 @@ document.getElementById('modal-2').onclick = function() {
 &lt;/script&gt;
 </pre>
 		<input id="modal-2" type="button" value="Example 2" />
+		<p><strong>Launching a modal with iframe</strong></p>
+		<pre>
+&lt;script&gt;
+document.getElementById('modal-3').onclick = function(){
+  chooserWrapper = document.createElement('iframe');
+  chooserWrapper.sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms';
+  chooserWrapper.src = 'http://jsmodal.com/docs/ajax-example.html';
+  chooserWrapper.style.display = 'block';
+  chooserWrapper.style.width = '640px';
+  chooserWrapper.style.height = '522px';
+  chooserWrapper.style.maxWidth = '100%';
+  chooserWrapper.style.border = 'none';
+
+  Modal.open({
+    iframeContent: chooserWrapper,
+    openCallback: function() {
+      console.log('This is an example of the use of openCallback');
+    },
+  });
+};
+&lt;/script&gt;</pre>
+		<input id="modal-3" type="button" value="Example 3" />
 		<p><strong>The parameters</strong></p>
 		<table style="width: 100%">
 			<tr>
@@ -135,6 +157,10 @@ document.getElementById('modal-2').onclick = function() {
 				<td class="light-grey">ajaxContent:</td>
 				<td>Define the URL to the content (cross-domain requests not supported 
 				yet).</td>
+			</tr>
+			<tr>
+				<td class="light-grey">iframeContent:</td>
+				<td>Define the iframe to the content (Modal width/height will auto calcuate from iframe, cross-domain requests not supported yet also).</td>
 			</tr>
 			<tr>
 				<td class="light-grey">width:<br />
@@ -206,6 +232,24 @@ document.getElementById('modal-2').onclick = function() {
     closeAfter: 10
   });
 }
+document.getElementById('modal-3').onclick = function(){
+	chooserWrapper = document.createElement('iframe');
+	chooserWrapper.sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms';
+  chooserWrapper.src = 'http://jsmodal.com/docs/ajax-example.html';
+  chooserWrapper.style.display = 'block';
+  chooserWrapper.style.width = '640px';
+  chooserWrapper.style.height = '522px';
+  chooserWrapper.style.maxWidth = '100%';
+  chooserWrapper.style.border = 'none';
+
+  Modal.open({
+    iframeContent: chooserWrapper,
+    openCallback: function() {
+      console.log('This is an example of the use of openCallback');
+    },
+  });
+};
+
 </script>
 
 </body>
