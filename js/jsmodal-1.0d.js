@@ -317,5 +317,10 @@ var Modal = (function () {
             });
         }
 
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            document.body.appendChild(modalOverlay);
+            document.body.appendChild(modalContainer);
+        }
+
         return method;
     }());
