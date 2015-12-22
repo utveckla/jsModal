@@ -58,12 +58,18 @@ var Modal = (function () {
                 method.center({});
             };
 
-            if (parameters.content && !parameters.ajaxContent) {
+            if (parameters.content && !parameters.ajaxContent && !parameters.iframeContent) {
                 modalContent.innerHTML = parameters.content;
-            } else if (parameters.ajaxContent && !parameters.content) {
+            } else if (parameters.ajaxContent && !parameters.content && !parameters.iframeContent) {
                 modalContainer.className = 'modal-loading';
                 method.ajax(parameters.ajaxContent, function insertAjaxResult(ajaxResult) {
                     modalContent.innerHTML = ajaxResult;
+                });
+            } else if (parameters.iframeContent && !parameters.content && !parameters.ajaxContent) {
+                modalContainer.className = 'modal-loading';
+                modalContent.appendChild(parameters.iframeContent);
+                parameters.iframeContent.addEventListener('load', function(){
+                    modalContainer.className = '';
                 });
             } else {
                 modalContent.innerHTML = '';
@@ -81,6 +87,24 @@ var Modal = (function () {
                 modalOverlay.style.visibility = 'visible';
             }
             modalContainer.style.visibility = 'visible';
+
+            if (parameters.iframeContent) {
+                modalOverlay.style.zIndex = 2998;
+                modalContainer.style.zIndex = 2998;
+                modalContent.style.zIndex = 2999;
+
+                modalContainer.style.padding = '0px';
+                modalContainer.style.margin = '0px';
+
+                modalContent.style.padding = '0px';
+                modalContent.style.margin = '0px';
+
+                modalHeader.style.padding = '10px 10px 0 10px';
+
+                // over write modal width/height with iframe
+                settings.width = parameters.iframeContent.style.width;
+                settings.height = parseInt(parameters.iframeContent.style.height, 10) + 30 + 'px';
+            }
 
             document.onkeypress = function (e) {
                 if (e.keyCode === 27 && settings.lock !== true) {
@@ -291,6 +315,11 @@ var Modal = (function () {
                 document.body.appendChild(modalOverlay);
                 document.body.appendChild(modalContainer);
             });
+        }
+
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            document.body.appendChild(modalOverlay);
+            document.body.appendChild(modalContainer);
         }
 
         return method;
